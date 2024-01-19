@@ -1,13 +1,14 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Link } from "react-router-dom"
 
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, } from "@/components/ui/form"
+import { Form, FormControl, FormField, FormItem, FormLabel, } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useForm } from "react-hook-form"
 import { SignupValidation } from "@/lib/validation"
 import { z } from "zod"
 import { Loader } from "@/components/shared/Loader"
+import { createUserAccount } from "@/lib/appwrite/api"
 
 const SignupForm = () => {
     const isLoading = false
@@ -22,8 +23,10 @@ const SignupForm = () => {
         },
     })
 
-    function onSubmit(values: z.infer<typeof SignupValidation>) {
-        console.log(values)
+    async function onSubmit(values: z.infer<typeof SignupValidation>) {
+        const newUser = await createUserAccount(values)
+
+        console.log(newUser);
     }
 
     return (
