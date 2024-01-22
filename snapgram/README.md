@@ -4,12 +4,14 @@ This is a practice project for building a social media app.
 
 ### Dependencies
 
-- [Vite]
-- [React]
-- [Typescript]
-- [Tailwind CSS]
-- [Shadcn]
-- [React-router-dom]
+- Vite
+- React.js
+- Appwrite
+- TypeScript
+- Shadcn
+- Tailwind CSS
+- React-router-dom
+- React-Query
 
 ### What I learned ?
 
