@@ -6,7 +6,7 @@ import {
 } from '@tanstack/react-query'
 import { createPost, createUserAccount, signInAccount, signOutAccount } from '../appwrite/api'
 import { INewPost, INewUser } from '@/types'
-import { QUERY_KEYS } from './queryKey'
+import { QUERY_KEYS } from './queryKeys'
 
 export const useCreateUserAccount = () => {
     return useMutation({
