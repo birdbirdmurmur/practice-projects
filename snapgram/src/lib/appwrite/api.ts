@@ -89,7 +89,6 @@ export async function getCurrentUser() {
 
         if (!currentUser) throw Error
 
-        // console.log(currentUser.documents[0])
         return currentUser.documents[0]
     } catch (error) {
         console.error(error);
@@ -151,7 +150,7 @@ export async function uploadFile(file: File) {
     }
 }
 
-export async function getFilePreview(fileId: string) {
+export function getFilePreview(fileId: string) {
     try {
         const fileUrl = storage.getFilePreview(
             appwriteConfig.storageID,
@@ -175,6 +174,22 @@ export async function deleteFile(fileId: string) {
         await storage.deleteFile(appwriteConfig.storageID, fileId);
 
         return { status: 'ok' }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function getRecentPosts() {
+    try {
+        const posts = await databases.listDocuments(
+            appwriteConfig.databaseID,
+            appwriteConfig.postCollectionID,
+            [Query.orderDesc('$createdAt'), Query.limit(20)],
+        )
+
+        if (!posts) throw Error
+
+        return posts
     } catch (error) {
         console.error(error);
     }
