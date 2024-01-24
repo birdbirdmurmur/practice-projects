@@ -29,3 +29,7 @@ export function multiFormatDate(inputDate: string = ''): string {
 
   return `${daysDifference} days ago`;
 }
+
+export function checkIsLiked(likeList: string[], userId: string): boolean {
+  return likeList.includes(userId)
+}
