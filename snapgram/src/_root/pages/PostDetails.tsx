@@ -12,7 +12,7 @@ const PostDetails = () => {
     const { id } = useParams()
     const { user } = useUserContext()
 
-    const { data: post, isPending } = useGetPostById(id || '')
+    const { data: post, isPending } = useGetPostById(id)
     const { mutate: deletePost } = useDeletePost()
 
     const handleDeletePost = () => {
@@ -101,7 +101,7 @@ const PostDetails = () => {
                         </div>
 
                         <div className="w-full">
-                            <PostStats post={post} userId={user.id} />
+                            {post && <PostStats post={post} userId={user.id} />}
                         </div>
                     </div>
                 </div>

@@ -5,12 +5,12 @@ import { checkIsLiked } from "@/lib/utils"
 import { Loader } from "./Loader"
 
 type PostStatsProps = {
-    post?: Models.Document
+    post: Models.Document
     userId: string
 }
 
 const PostStats = ({ post, userId }: PostStatsProps) => {
-    const likesList = post?.likes.map((user: Models.Document) => user.$id)
+    const likesList = post.likes.map((user: Models.Document) => user.$id)
 
     const [likes, setLikes] = useState(likesList)
     const [isSaved, setIsSaved] = useState(false)
