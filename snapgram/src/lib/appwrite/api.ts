@@ -3,6 +3,9 @@ import { ID, Query } from "appwrite";
 import { account, appwriteConfig, avatars, databases, storage } from "./config";
 import { INewPost, INewUser, IUpdatePost } from "@/types";
 
+// ============
+//     Auth
+// ============
 export async function createUserAccount(user: INewUser) {
     try {
         const newAccount = await account.create(
@@ -96,6 +99,9 @@ export async function getCurrentUser() {
     }
 }
 
+// ============
+//     Posts
+// ============
 export async function createPost(post: INewPost) {
     try {
         const uploadedFile = await uploadFile(post.file[0])
@@ -311,15 +317,19 @@ export async function updatePost(post: IUpdatePost) {
     }
 }
 
-export async function deletePost(postId: string, imageId: string) {
+export async function deletePost(postId?: string, imageId?: string) {
     if (!postId || !imageId) throw Error
 
     try {
-        await databases.deleteDocument(
+        const statusCode = await databases.deleteDocument(
             appwriteConfig.databaseID,
             appwriteConfig.postCollectionID,
             postId
         )
+
+        if (!statusCode) throw Error
+
+        await deleteFile(imageId)
 
         return { status: 'ok' }
     } catch (error) {
