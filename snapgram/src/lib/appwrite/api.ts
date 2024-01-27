@@ -378,3 +378,19 @@ export async function searchPosts(searchTerm: string) {
         console.error(error);
     }
 }
+
+export async function getUserById(userId: string) {
+    try {
+        const user = await databases.getDocument(
+            appwriteConfig.databaseID,
+            appwriteConfig.userCollectionID,
+            userId
+        )
+
+        if (!user) throw Error
+
+        return user
+    } catch (error) {
+        console.error(error);
+    }
+}
